@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mysql:
+    platform: linux/amd64
     image: "mysql:8.0.25"
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -9,6 +10,7 @@ services:
     ports:
       - "3306:3306"
   postgresql:
+    platform: linux/amd64
     image: "postgres:12.10"
     environment:
       - POSTGRES_USER=root
@@ -17,11 +19,13 @@ services:
     ports:
       - "5432:5432"
   redis:
+    platform: linux/amd64
     image: "redis:6.2.6"
     command: "redis-server"
     ports:
       - "6379:6379"
   mssql:
+    platform: linux/amd64
     # FIXME (himkt): https://github.com/microsoft/mssql-docker/issues/668
     # image: "mcr.microsoft.com/mssql/server:2019-CU15-ubuntu-20.04"
     image: "mcr.microsoft.com/azure-sql-edge"
