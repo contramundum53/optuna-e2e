@@ -2,6 +2,7 @@ import optuna
 import pymssql
 
 from objective import objective
+from optuna.samplers import RandomSampler
 
 
 def create_mssql_database() -> None:
@@ -15,20 +16,20 @@ create_mssql_database()
 
 
 print("mysql")
-study1 = optuna.create_study(study_name="test", storage="mysql+pymysql://root:root@mysql:3306/optuna")
-# study1.optimize(objective, n_trials=10)
+study1 = optuna.create_study(study_name="test", storage="mysql+pymysql://root:root@mysql:3306/optuna", sampler=RandomSampler())
+study1.optimize(objective, n_trials=10000)
 print("postgresql")
-study2 = optuna.create_study(study_name="test", storage="postgresql+psycopg2://root:root@postgresql/optuna")
-# study2.optimize(objective, n_trials=10)
+study2 = optuna.create_study(study_name="test", storage="postgresql+psycopg2://root:root@postgresql/optuna", sampler=RandomSampler())
+study2.optimize(objective, n_trials=10000)
 print("sqlite")
-study3 = optuna.create_study(study_name="test", storage="sqlite:///data/sample.db")
-# study3.optimize(objective, n_trials=10)
+study3 = optuna.create_study(study_name="test", storage="sqlite:///data/sample.db", sampler=RandomSampler())
+study3.optimize(objective, n_trials=10000)
 print("mssql")
-study4 = optuna.create_study(study_name="test", storage="mssql+pymssql://sa:optuna-test-5ZYB@mssql/optuna?charset=utf8")
-# study4.optimize(objective, n_trials=10)
+study4 = optuna.create_study(study_name="test", storage="mssql+pymssql://sa:optuna-test-5ZYB@mssql/optuna?charset=utf8", sampler=RandomSampler())
+study4.optimize(objective, n_trials=10000)
 print("redis")
-study5 = optuna.create_study(study_name="test", storage="redis://redis:6379")
-# study5.optimize(objective, n_trials=10)
+study5 = optuna.create_study(study_name="test", storage="redis://redis:6379", sampler=RandomSampler())
+study5.optimize(objective, n_trials=10000)
 
 print(study1)
 print(study2)
