@@ -21,3 +21,4 @@ def objective_factory(allow_inf: bool, allow_nan: bool):
             return c1
         else:
             return x1**y1 + x2**y2 + x3**y3
+    return objective
