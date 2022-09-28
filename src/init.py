@@ -23,7 +23,7 @@ study2 = optuna.create_study(study_name="test", storage="postgresql+psycopg2://r
 study2.optimize(objective_factory(allow_inf=True, allow_nan=False), n_trials=10)
 print("sqlite")
 study3 = optuna.create_study(study_name="test", storage="sqlite:///data/sample.db", sampler=RandomSampler())
-study3.optimize(objective_factory(allow_inf=True, allow_nan=True), n_trials=10)
+study3.optimize(objective_factory(allow_inf=True, allow_nan=False), n_trials=10)
 print("mssql")
 study4 = optuna.create_study(study_name="test", storage="mssql+pymssql://sa:optuna-test-5ZYB@mssql/optuna?charset=utf8", sampler=RandomSampler())
 study4.optimize(objective_factory(allow_inf=True, allow_nan=True), n_trials=10)
