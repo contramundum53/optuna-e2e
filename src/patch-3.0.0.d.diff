@@ -1,12 +1,12 @@
 diff --git a/optuna/storages/_rdb/alembic/versions/v3.0.0.d.py b/optuna/storages/_rdb/alembic/versions/v3.0.0.d.py
-index 5ee3dc038..25b3144d6 100644
+index 5ee3dc038..40aa1937b 100644
 --- a/optuna/storages/_rdb/alembic/versions/v3.0.0.d.py
 +++ b/optuna/storages/_rdb/alembic/versions/v3.0.0.d.py
-@@ -99,6 +99,7 @@ def upgrade():
-             existing_type=sa.Float(precision=FLOAT_PRECISION),
-             nullable=True,
-         )
-+    raise Exception("This migration is not complete. Please fix the inconsistent state.")
- 
-     session = orm.Session(bind=bind)
-     try:
+@@ -124,6 +124,7 @@ def upgrade():
+                     "value": stored_value,
+                 }
+             )
++            raise Exception("This migration is not complete. Please fix the inconsistent state.")
+         session.bulk_update_mappings(TrialValueModel, mapping)
+         session.commit()
+     except SQLAlchemyError as e:
