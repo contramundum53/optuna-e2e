@@ -1,0 +1,34 @@
+diff --git a/optuna/storages/_rdb/alembic/versions/v3.0.0.c.py b/optuna/storages/_rdb/alembic/versions/v3.0.0.c.py
+index f96df8609..85150fd0d 100644
+--- a/optuna/storages/_rdb/alembic/versions/v3.0.0.c.py
++++ b/optuna/storages/_rdb/alembic/versions/v3.0.0.c.py
+@@ -88,6 +88,9 @@ def upgrade():
+         )
+ 
+     session = orm.Session(bind=bind)
++
++    cnt = 0
++
+     try:
+         records = session.query(IntermediateValueModel).all()
+         mapping = []
+@@ -116,6 +119,10 @@ def upgrade():
+                     "intermediate_value": stored_value,
+                 }
+             )
++            cnt += 1
++            if cnt == 8:
++                break # make an inconsistent state
++
+         session.bulk_update_mappings(IntermediateValueModel, mapping)
+         session.commit()
+     except SQLAlchemyError as e:
+@@ -124,6 +131,8 @@ def upgrade():
+     finally:
+         session.close()
+ 
++    raise Exception("This migration is not complete. Please fix the inconsistent state.")
++
+ 
+ def downgrade():
+     bind = op.get_bind()
