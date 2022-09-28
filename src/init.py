@@ -26,10 +26,10 @@ study3 = optuna.create_study(study_name="test", storage="sqlite:///data/sample.d
 study3.optimize(objective_factory(allow_inf=True, allow_nan=False), n_trials=10)
 print("mssql")
 study4 = optuna.create_study(study_name="test", storage="mssql+pymssql://sa:optuna-test-5ZYB@mssql/optuna?charset=utf8", sampler=RandomSampler())
-study4.optimize(objective_factory(allow_inf=True, allow_nan=True), n_trials=10)
+study4.optimize(objective_factory(allow_inf=True, allow_nan=False), n_trials=10)
 print("redis")
 study5 = optuna.create_study(study_name="test", storage="redis://redis:6379", sampler=RandomSampler())
-study5.optimize(objective_factory(allow_inf=True, allow_nan=True), n_trials=10)
+study5.optimize(objective_factory(allow_inf=False, allow_nan=False), n_trials=10)
 
 print(study1)
 print(study2)
